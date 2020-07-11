@@ -37,3 +37,5 @@ function generateLine(method: Method, path: string, controller: string) {
 
 fs.writeFileSync("./routes", lines)
 
+
+
