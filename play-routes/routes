@@ -1,0 +1,7 @@
+GET		/		controllers.HomeController.index
+GET		/explore		controllers.HomeController.explore
+GET		/tutorial		controllers.HomeController.tutorial
+GET		/hello		controllers.HomeController.tutorial
+GET		/person		controllers.HomeController.person
+GET		/personjson		controllers.HomeController.personJson
+GET		/assets/*file		controllers.Assets.versioned(path="/public", file: Asset)
