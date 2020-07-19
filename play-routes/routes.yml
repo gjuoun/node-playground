@@ -1,8 +1,0 @@
-GET:
-  - /: controllers.HomeController.index
-  - /explore: controllers.HomeController.explore
-  - /tutorial: controllers.HomeController.tutorial
-  - /hello: controllers.HomeController.tutorial
-  - /person: controllers.HomeController.person
-  - /personjson: controllers.HomeController.personJson
-  - /assets/*file: 'controllers.Assets.versioned(path="/public", file: Asset)'
