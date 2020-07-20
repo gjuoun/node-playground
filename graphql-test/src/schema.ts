@@ -3,13 +3,15 @@ import { gql } from "apollo-server";
 export const typeDefs = gql`
 
 scalar Date
+
 type Query {
   hello: String
-  users: [User!]!
+  users(name: String): [User!]!
 }
 type User {
     name: String
     age: Int
+    timestamp: Date
 }
 # User schema
 type Users {

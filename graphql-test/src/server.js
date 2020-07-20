@@ -9,13 +9,14 @@ const typeDefs = gql`
 
   type User {
     name: String
-    age: Int
+    age: Int,
+    t
   }
 
 `;
 
 const users = [
-  { name: "Jun", age: 30 },
+  { name: "Jun", age: 30,  },
   { name: "Mathew", age: 23 },
   { name: "Jane", age: 20 },
 ]
