@@ -25,7 +25,7 @@ class Student {
   // @Transform(({ value }) => JSON.parse(value))
   complicatedObj: object;
 
-  @Type(() => Number)
+  @Type(() => ListOfNumber)
   // @Transform(({ value }) => JSON.parse(value))
   list: ListOfNumber;
 }
@@ -34,11 +34,13 @@ class School {
   name: string;
 }
 
-const student = {
+let student = {
   name: "John",
   age: "20",
   list: "[1, 2, 3]",
 };
+
+const studentList = plainToClass(ListOfNumber, student.list); //?
 
 // fe sends json
 const studentJSON = JSON.stringify(student); //?
