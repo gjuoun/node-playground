@@ -20,5 +20,3 @@ class MyClass extends Serializable implements TransformKey {
   })
   public myProperty = "Hello world!";
 }
-
-console.log(new MyClass().toJSON());
