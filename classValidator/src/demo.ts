@@ -25,7 +25,7 @@ import {
 
 // <= 5 good, > 5 bad
 @ValidatorConstraint({ name: "CustomRatingValidator", async: false })
-export class CustomRaitingRalidator implements ValidatorConstraintInterface {
+export class CustomRaitingValidator implements ValidatorConstraintInterface {
   validate(text: number, args: ValidationArguments) {
     text; //?
     args; //?
@@ -52,7 +52,7 @@ export class Post {
   @Contains("hello")
   text: string;
 
-  @Validate(CustomRaitingRalidator)
+  @Validate(CustomRaitingValidator)
   @IsInt() // <= 5 good, > 5 bad
   rating: number;
 
