@@ -18,5 +18,5 @@ class MyClass extends Serializable implements TransformKey {
   @SerializeProperty({
     serializedKey: "my_property",
   })
-  public myProperty = "Hello world! ";
+  public myProperty = "Hello world!";
 }
