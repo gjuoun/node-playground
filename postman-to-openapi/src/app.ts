@@ -1,21 +1,11 @@
 import express from 'express'
-import postmanToOpenApi from 'postman-to-openapi'
 import path from 'path'
 
-const collectionJson = path.join(__dirname, './collection.json')
-const outputPath = path.join('./api.yaml')
 
-async function main(){
+const app = express()
 
-  try{
-    const result = await postmanToOpenApi(collectionJson, outputPath, {
-      defaultTag: "General"
-    })
+app.use(express.static(path.join(__dirname, 'public')))
 
-    console.log(result)
-  }catch(e){
-    console.log(e)
-  }
-}
-
-main()
+app.listen(3000, ()=> {
+    console.log('Server is running on port 3000')
+})
