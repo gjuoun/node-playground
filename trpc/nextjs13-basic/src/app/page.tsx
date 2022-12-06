@@ -7,6 +7,7 @@ const IndexPage = async () => {
   // console.log("server received", res);
   // console.log("rsc cookie", headers().get("cookie"));
   const res = await trpcRSC.hello({ text: "guo" });
+  
   return (
     <div>
       index {res.greeting}

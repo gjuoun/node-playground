@@ -1,15 +1,23 @@
 "use client";
+import { trpcReactQuery } from "../pages/config/trpc/trpc.react-query";
+import { use, useEffect } from "react";
 import { trpcClient } from "../pages/config/trpc/trpc.client";
-import { useEffect } from "react";
+
+// const getGreeting = async () => {
+//   const res = await trpcClient.hello.query({ text: "jun" });
+//   return res;
+// };
 
 export const ClientComponent = () => {
-  // const res = trpcClient.hello.useQuery({ text: "jun" });
-  const { data, mutate } = trpcClient.login.useMutation({});
+  // const { data, mutate } = trpcReactQuery.login.useMutation({});
+  // const data = use(getGreeting());
 
-  useEffect(() => {
-    mutate({});
-  }, []);
+  const { data } = trpcReactQuery.hello.useQuery({ text: "guoguo" });
 
-  return <>This is {data?.email ?? "N/A"}</>;
-  // return <>nothing</>;
+  // useEffect(() => {
+  // mutate({});
+  // }, []);
+
+  // return <>This is {data?.greeting ?? "N/A"}</>;
+  return <>nothing1234</>;
 };

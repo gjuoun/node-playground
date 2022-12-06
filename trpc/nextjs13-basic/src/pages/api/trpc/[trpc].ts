@@ -1,7 +1,7 @@
 import { createNextApiHandler } from "@trpc/server/adapters/next";
 import { getSessionRSC } from "../../config/trpc/trpc.rsc";
 import { appRouter } from "../../config/trpc/trpc.server";
-import { createContext } from "../../config/trpc/trpc.serverContext";
+import { createContext } from "../../config/trpc/trpc.server.context";
 
 export default createNextApiHandler({
   router: appRouter,

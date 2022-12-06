@@ -3,10 +3,10 @@ import { AppRouter } from "./trpc.server";
 import superjson from "superjson";
 
 // Notice the <AppRouter> generic here.
-export const trpcProxyClient = createTRPCProxyClient<AppRouter>({
+export const trpcClient = createTRPCProxyClient<AppRouter>({
   links: [
     httpBatchLink({
-      url: "http://localhost:3000/api/trpc",
+      url: "/api/trpc",
     }),
   ],
   transformer: superjson,

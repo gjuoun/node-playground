@@ -1,7 +1,7 @@
 import { z, ZodError } from "zod";
 import { TRPCError, initTRPC } from "@trpc/server";
 import superjson from "superjson";
-import { TrpcContext } from "./trpc.serverContext";
+import { TrpcContext } from "./trpc.server.context";
 import { getIronSession } from "iron-session";
 
 // Avoid exporting the entire t-object
@@ -36,7 +36,14 @@ export const appRouter = router({
         text: z.string(),
       })
     )
-    .query(({ input }) => {
+    .query(async ({ input, ctx }) => {
+      if (ctx.type === "server") {
+        console.log("server user", ctx.session?.user);
+      } else if (ctx.type === "server-component") {
+        const session = await ctx.getRscSession!();
+        console.log("rsc user", session?.user);
+      }
+
       return {
         greeting: `hello ${input.text}`,
       };
@@ -55,8 +62,6 @@ export const appRouter = router({
     return user;
   }),
 });
-
-
 
 // export type definition of API
 export type AppRouter = typeof appRouter;

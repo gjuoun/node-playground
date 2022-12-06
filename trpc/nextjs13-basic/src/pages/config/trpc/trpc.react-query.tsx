@@ -6,7 +6,7 @@ import { useState } from "react";
 import superjson from "superjson";
 import type { AppRouter } from "./trpc.server";
 
-export const trpcClient = createTRPCReact<AppRouter>({
+export const trpcReactQuery = createTRPCReact<AppRouter>({
   // unstable_overrides: {
   //   useMutation: {
   //     async onSuccess(opts) {
@@ -15,6 +15,7 @@ export const trpcClient = createTRPCReact<AppRouter>({
   //     },
   //   },
   // },
+  
 });
 
 function getBaseUrl() {
@@ -34,7 +35,7 @@ function getBaseUrl() {
 export function ClientProvider(props: { children: React.ReactNode }) {
   const [queryClient] = useState(() => new QueryClient());
   const [trpcClientInstance] = useState(() =>
-    trpcClient.createClient({
+    trpcReactQuery.createClient({
       links: [
         loggerLink({
           enabled: () => true,
@@ -47,10 +48,13 @@ export function ClientProvider(props: { children: React.ReactNode }) {
     })
   );
   return (
-    <trpcClient.Provider client={trpcClientInstance} queryClient={queryClient}>
+    <trpcReactQuery.Provider
+      client={trpcClientInstance}
+      queryClient={queryClient}
+    >
       <QueryClientProvider client={queryClient}>
         {props.children}
       </QueryClientProvider>
-    </trpcClient.Provider>
+    </trpcReactQuery.Provider>
   );
 }
