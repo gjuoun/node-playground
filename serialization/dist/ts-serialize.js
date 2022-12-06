@@ -28,19 +28,17 @@ var ts_serialize_1 = require("@gamebridgeai/ts_serialize");
 var MyClass = /** @class */ (function (_super) {
     __extends(MyClass, _super);
     function MyClass() {
-        var _this = _super.call(this) || this;
+        var _this = _super !== null && _super.apply(this, arguments) || this;
         _this.myProperty = "Hello world!";
         return _this;
     }
-    MyClass.prototype.tsTransformKey = function (key) {
-        return "__" + key + "__";
-    };
     __decorate([
         ts_serialize_1.SerializeProperty({
-            serializedKey: "my_property",
+            serializedKey: "my_string",
         }),
         __metadata("design:type", Object)
     ], MyClass.prototype, "myProperty", void 0);
     return MyClass;
 }(ts_serialize_1.Serializable));
-console.log(new MyClass().toJSON());
+var myClass = new MyClass();
+console.log(JSON.stringify(myClass));

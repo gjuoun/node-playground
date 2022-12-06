@@ -9,7 +9,8 @@ import {
   IsDate,
   Min,
   Max,
-  ValidationError
+  ValidationError,
+  IsNumber,
 } from "class-validator";
 
 export class Post {
@@ -22,7 +23,7 @@ export class Post {
   @IsInt()
   @Min(0)
   @Max(10)
-  rating: number;
+  point: number;
 
   @IsEmail()
   email: string;
@@ -32,36 +33,27 @@ export class Post {
 
   @IsDate()
   createDate: Date;
+
+  @IsNumber({
+    maxDecimalPlaces: 2,
+  })
+  @Min(0)
+  raiting: number;
 }
 
-let post = new Post();
-post.title = "Hello"; // should not pass
-// post.text = 'this is a great post about hell world'; // should not pass
-// post.rating = 11; // should not pass
-// post.email = 'google.com'; // should not pass
-// post.site = 'googlecom'; // should not pass
+async function main() {
+  let post = new Post();
+  post.title = "1234567890";
+  post.text = "helloworld";
+  post.point = 8;
+  post.email = "gjuoun@gmail.com";
+  post.site = "google.com";
+  post.createDate = new Date();
+  post.raiting = 8.53;
 
-validate(post).then((errors) => {
-  // errors is an array of validation errors
-  if (errors.length > 0) {
-    console.log("validation failed. errors: ", errors);
-    
-  } else {
-    console.log("validation succeed");
-  }
-});
+  const errors = await validate(post);
 
-validateOrReject(post).catch((errors) => {
-  console.log("Promise rejected (validation failed). Errors: ", errors);
-});
-// or
-async function validateOrRejectExample(input) {
-  try {
-    await validateOrReject(input);
-  } catch (errors) {
-    console.log(
-      "Caught promise rejection (validation failed). Errors: ",
-      errors
-    );
-  }
+  console.log(errors);
 }
+
+main();
