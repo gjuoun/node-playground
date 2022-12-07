@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 import { PropsWithChildren } from "react";
-import { ClientProvider } from "../pages/config/trpc/trpc.react-query";
+import { ClientProvider } from "../config/trpc/trpc.react-query";
 
 export default function RootLayout(props: PropsWithChildren) {
   return (

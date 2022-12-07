@@ -1,5 +1,5 @@
 import { withIronSessionApiRoute } from "iron-session/next";
-import { sessionConfig } from "./ironSession/ironSession.config";
+import { sessionConfig } from "../../config/ironSession/ironSession.config";
 
 export default withIronSessionApiRoute(async function loginRoute(req, res) {
   // get user from database then:

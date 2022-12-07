@@ -1,7 +1,7 @@
 import { appRouter } from "./trpc.server";
 import { cookies, headers } from "next/headers";
 import { getIronSession } from "iron-session";
-import { sessionConfig } from "../../api/ironSession/ironSession.config";
+import { sessionConfig } from "../ironSession/ironSession.config";
 
 export async function getSessionRSC() {
   const session = await getIronSession(

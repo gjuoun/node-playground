@@ -1,6 +1,6 @@
 import * as trpcNext from "@trpc/server/adapters/next";
 import { getIronSession, IronSession } from "iron-session";
-import { sessionConfig } from "../../api/ironSession/ironSession.config";
+import { sessionConfig } from "../ironSession/ironSession.config";
 import { getSessionRSC } from "./trpc.rsc";
 
 export type TrpcServerParams = {

@@ -1,7 +1,7 @@
 "use client";
-import { trpcReactQuery } from "../pages/config/trpc/trpc.react-query";
+import { trpcReactQuery } from "../config/trpc/trpc.react-query";
 import { use, useEffect } from "react";
-import { trpcClient } from "../pages/config/trpc/trpc.client";
+import { trpcClient } from "../config/trpc/trpc.client";
 
 // const getGreeting = async () => {
 //   const res = await trpcClient.hello.query({ text: "jun" });
