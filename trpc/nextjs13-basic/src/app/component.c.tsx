@@ -9,15 +9,8 @@ import { trpcClient } from "../config/trpc/trpc.client";
 // };
 
 export const ClientComponent = () => {
-  // const { data, mutate } = trpcReactQuery.login.useMutation({});
-  // const data = use(getGreeting());
-
-  const { data } = trpcReactQuery.hello.useQuery({ text: "guoguo" });
-
-  // useEffect(() => {
-  // mutate({});
-  // }, []);
+  
 
   // return <>This is {data?.greeting ?? "N/A"}</>;
-  return <>nothing1234</>;
+  return <div>client component</div>;
 };

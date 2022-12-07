@@ -1,16 +1,21 @@
-// import { trpcRSC } from "../pages/config/trpc/trpc.server";
+"use client";
+
 import { ClientComponent } from "./component.c";
 import { cookies, headers } from "next/headers";
 import { getSessionRSC, trpcRSC } from "../config/trpc/trpc.rsc";
+import { trpcReactQuery } from "../config/trpc/trpc.react-query";
+import { useEffect } from "react";
 
-const IndexPage = async () => {
-  // console.log("server received", res);
-  // console.log("rsc cookie", headers().get("cookie"));
-  const res = await trpcRSC.hello({ text: "guo" });
+const IndexPage = () => {
+  const { data, mutate } = trpcReactQuery.login.useMutation({});
+
+  useEffect(() => {
+    console.log("client", data);
+  }, [data]);
 
   return (
     <div>
-      index {res.greeting}
+      index
       <div>
         <ClientComponent />
       </div>

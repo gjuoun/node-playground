@@ -1,11 +1,11 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { trpc } from "~/client/trpcClient";
+import { trpcReactQuery } from "~/client/trpcClient";
 import { Inputs } from "~/shared/utils";
 
 export function CreatePostForm() {
-  const addPost = trpc.post.add.useMutation();
+  const addPost = trpcReactQuery.post.add.useMutation();
 
   const router = useRouter();
 
@@ -35,16 +35,16 @@ export function CreatePostForm() {
           console.error({ cause }, "Failed to add post");
         }
       }}
-      className='space-y-2'
+      className="space-y-2"
     >
       <fieldset>
-        <label htmlFor='title' className='label'>
+        <label htmlFor="title" className="label">
           Title
         </label>
         <input
-          id='title'
-          name='title'
-          type='text'
+          id="title"
+          name="title"
+          type="text"
           disabled={addPost.isLoading}
           className={
             "input" + (addPost.error?.data?.zod?.title ? " input--error" : "")
@@ -56,13 +56,13 @@ export function CreatePostForm() {
       </fieldset>
 
       <fieldset>
-        <label htmlFor='text' className='label'>
+        <label htmlFor="text" className="label">
           Text
         </label>
 
         <textarea
-          id='text'
-          name='text'
+          id="text"
+          name="text"
           disabled={addPost.isLoading}
           className={
             "input" + (addPost.error?.data?.zod?.text ? " input--error" : "")
@@ -73,7 +73,7 @@ export function CreatePostForm() {
         )}
       </fieldset>
       <fieldset>
-        <input type='submit' disabled={addPost.isLoading} className='button' />
+        <input type="submit" disabled={addPost.isLoading} className="button" />
         {addPost.error && !addPost.error.data?.zod && (
           <p style={{ color: "red" }}>
             {addPost.error.message}

@@ -2,7 +2,7 @@
 
 import { dehydrate, useQueryClient } from "@tanstack/react-query";
 import { Fragment, useEffect, useRef } from "react";
-import { trpc } from "~/client/trpcClient";
+import { trpcReactQuery } from "~/client/trpcClient";
 import { useIsIntersecting } from "../client/useIsIntersecting";
 import { PostListItem } from "./PostListItem";
 
@@ -20,9 +20,9 @@ export function PostList() {
   const queryClient = useQueryClient();
   console.log(
     `hydrated client (render #${useRenderCount()})`,
-    dehydrate(queryClient),
+    dehydrate(queryClient)
   );
-  const query = trpc.post.list.useInfiniteQuery(
+  const query = trpcReactQuery.post.list.useInfiniteQuery(
     {},
     {
       getNextPageParam(lastPage) {
@@ -30,7 +30,7 @@ export function PostList() {
       },
       refetchOnMount: false,
       staleTime: Infinity,
-    },
+    }
   );
 
   const fetchNextPageRef = useRef(query.fetchNextPage);
@@ -43,7 +43,7 @@ export function PostList() {
   }, [isLoadMoreVisible, query.hasNextPage, query.isFetching]);
 
   return (
-    <ul role='list' className='divide-y divide-gray-200'>
+    <ul role="list" className="divide-y divide-gray-200">
       {query.data?.pages.map((page, index) => (
         <Fragment key={index}>
           {page.items.map((post) => (

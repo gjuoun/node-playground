@@ -7,15 +7,14 @@ import superjson from "superjson";
 import type { AppRouter } from "./trpc.server";
 
 export const trpcReactQuery = createTRPCReact<AppRouter>({
-  // unstable_overrides: {
-  //   useMutation: {
-  //     async onSuccess(opts) {
-  //       await opts.originalFn();
-  //       await opts.queryClient.invalidateQueries();
-  //     },
-  //   },
-  // },
-  
+  unstable_overrides: {
+    useMutation: {
+      async onSuccess(opts) {
+        await opts.originalFn();
+        await opts.queryClient.invalidateQueries();
+      },
+    },
+  },
 });
 
 function getBaseUrl() {

@@ -54,11 +54,11 @@ export const appRouter = router({
       email: "jun@mistplay.com",
       name: "jun",
     };
-    ctx.session!.user = {
-      email: user.email,
-      name: user.name,
-    };
-    await ctx.session?.save();
+    // ctx.session!.user = {
+    //   email: user.email,
+    //   name: user.name,
+    // };
+    // await ctx.session?.save();
     return user;
   }),
 });
