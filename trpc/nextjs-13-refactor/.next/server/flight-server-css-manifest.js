@@ -1,0 +1,1 @@
+self.__RSC_CSS_MANIFEST={"__entry_css__":{"/Users/junguo/Code/gjuoun/node-playground/trpc/nextjs-13-refactor/app/page":["/Users/junguo/Code/gjuoun/node-playground/trpc/nextjs-13-refactor/styles/globals.css"]},"/Users/junguo/Code/gjuoun/node-playground/trpc/nextjs-13-refactor/app/layout.tsx":["/Users/junguo/Code/gjuoun/node-playground/trpc/nextjs-13-refactor/styles/globals.css"]}

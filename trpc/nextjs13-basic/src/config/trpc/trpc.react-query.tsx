@@ -7,14 +7,14 @@ import superjson from "superjson";
 import type { AppRouter } from "./trpc.server";
 
 export const trpcReactQuery = createTRPCReact<AppRouter>({
-  unstable_overrides: {
-    useMutation: {
-      async onSuccess(opts) {
-        await opts.originalFn();
-        await opts.queryClient.invalidateQueries();
-      },
-    },
-  },
+  // unstable_overrides: {
+  //   useMutation: {
+  //     async onSuccess(opts) {
+  //       await opts.originalFn();
+  //       await opts.queryClient.invalidateQueries();
+  //     },
+  //   },
+  // },
 });
 
 function getBaseUrl() {
@@ -31,26 +31,23 @@ function getBaseUrl() {
   return `http://localhost:${process.env.PORT ?? 3000}`;
 }
 
+const queryClient = new QueryClient();
+
+const trpcClient = trpcReactQuery.createClient({
+  links: [
+    loggerLink({
+      enabled: () => true,
+    }),
+    httpBatchLink({
+      url: `/api/trpc`,
+    }),
+  ],
+  transformer: superjson,
+});
+
 export function ClientProvider(props: { children: React.ReactNode }) {
-  const [queryClient] = useState(() => new QueryClient());
-  const [trpcClientInstance] = useState(() =>
-    trpcReactQuery.createClient({
-      links: [
-        loggerLink({
-          enabled: () => true,
-        }),
-        httpBatchLink({
-          url: `${getBaseUrl()}/api/trpc`,
-        }),
-      ],
-      transformer: superjson,
-    })
-  );
   return (
-    <trpcReactQuery.Provider
-      client={trpcClientInstance}
-      queryClient={queryClient}
-    >
+    <trpcReactQuery.Provider client={trpcClient} queryClient={queryClient}>
       <QueryClientProvider client={queryClient}>
         {props.children}
       </QueryClientProvider>
