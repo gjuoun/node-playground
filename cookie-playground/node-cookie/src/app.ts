@@ -33,7 +33,8 @@ app.enable("trust proxy");
 app.use(
   ironSession({
     cookieName: "jun-session",
-    password: "/junguo/Code/gjuoun/node-playground/cookie-playground/node-cookie/node_modules/.pnpm/iron-session@6.3.1_express@4.18.1/node_modules/iron-session/express/index.ts:10:27",
+    password:
+      "/junguo/Code/gjuoun/node-playground/cookie-playground/node-cookie/node_modules/.pnpm/iron-session@6.3.1_express@4.18.1/node_modules/iron-session/express/index.ts:10:27",
     cookieOptions: {
       secure: process.env.NODE_ENV === "development" ? false : true,
       httpOnly: process.env.NODE_ENV === "development" ? false : true,
@@ -52,6 +53,6 @@ app.get("/views", (req, res) => {
   res.send({ views: req.session!.views });
 });
 
-app.listen(3000, () => {
+const server = app.listen(3000, () => {
   console.log("listen on port 3000");
 });
