@@ -28,6 +28,7 @@ app.use(
     secure: process.env.NODE_ENV === "development" ? false : true,
     httpOnly: process.env.NODE_ENV === "development" ? false : true,
     sameSite: process.env.NODE_ENV === "development" ? false : "none",
+    expires: new Date(Date.now() + 60 * 60 * 1000),
   })
 );
 // app.use(
@@ -49,14 +50,17 @@ app.use(
 //   res.send({ views: req.session.views });
 // });
 
-
 app.get("/", async (req, res) => {
   req.session!.views = (req.session!.views || 0) + 1;
   res.send({ views: req.session!.views });
 });
 
 app.get("/views", (req, res) => {
-  res.send({ views: req.session!.views });
+  if (req.session!.views === undefined) {
+    res.send({ views: req.session!.views });
+  } else {
+    res.send({ views: 0 });
+  }
 });
 
 const server = app.listen(3000, () => {

@@ -1,26 +1,29 @@
 import fetch from "node-fetch";
 import { getAgent } from "./client/agent";
 import { Cookie, CookieJar } from "tough-cookie";
+import makeFetchCookie from "fetch-cookie";
 
-const cookieJar = new CookieJar();
+const fetchCookie = makeFetchCookie(fetch);
+type CookieFetch = typeof fetchCookie;
+
+const userMap = new Map<string, CookieFetch>();
 
 async function main() {
-  const res = await fetch("http://localhost:3000", {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.15; rv:92.0) Gecko/20100101 Firefox/92.0",
-    },
-    agent: getAgent,
-  });
+  let fetchFunc: CookieFetch;
+  if (userMap.has("gjuoun")) {
+     fetchFunc = userMap.get("gjuoun")!;
+  } else {
+    fetchFunc = makeFetchCookie(fetch);
+    userMap.set("gjuoun", fetchFunc);
+  }
 
-  const cookie = Cookie.parse(res.headers.get("Set-Cookie")!);
+  const res = await fetchFunc("http://localhost:3000");
+  const json = await res.json();
+  console.log(res.headers.get("set-cookie"));
 
-  await cookieJar.setCookie(cookie!, `http://localhost:3000`)
-
-  const cookiesInJar = await cookieJar.getCookies("http://localhost:3000")
-
-  const body = await res.json();
-  console.log(body);
+  const res2 = await fetchFunc("http://localhost:3000/views");
+  const json2 = await res2.json();
+  console.log("2");
 }
 
 main();
